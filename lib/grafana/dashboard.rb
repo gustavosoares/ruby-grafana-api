@@ -28,6 +28,14 @@ module Grafana
       return post_request(endpoint, dashboard)
     end
 
+    def update_dashboard(properties={})
+      endpoint = "/api/dashboards/db/"
+      logger.info("Updating dashboard: #{properties['title']} (id=#{properties['id']}) (POST /api/dashboards/db/")
+      dashboard = self.build_template(properties)
+      logger.info("dashboad: #{dashboard}")
+      return post_request(endpoint, dashboard)
+    end
+
     def delete_dashboard(name)
       name = self.create_slug(name)
       endpoint = "/api/dashboards/db/#{name}"
